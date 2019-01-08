@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="./vue.js" charset="utf-8"></script>
+    <style media="screen">
+      .box1 { display: flex; margin-top: 20px; justify-content: center; }
+      .btn-box { user-select: none; text-align: center; }
+      .box1 span { display: inline-block; width: 39px; padding: 4px 0; margin: 0 5px; background: rgba(245, 245, 245, .7); border-radius: 4px; cursor: pointer; }
+      .box1 span.act { background: #ff6f6c; color: #fff; }
+    </style>
+  </head>
+  <body>
+  <div class="box1" id="app">
+    <div class="btn-box">
+      <span @click="prev">&lt;</span>
+      <span :class="{act: idx===now}" v-for="idx in pages" @click="changePage(idx)">{{idx}}</span>
+      <span @click="next">&gt;</span>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    new Vue({
+      data: {
+        ellipsis: '',
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        pages: [],
+        now: 1,
+        offset: 2
+      },
+      methods: {
+        changePage(idx) {
+          if (typeof idx === 'number') {
+            console.log(this.now = idx)
+            this.setPages()
+          }
+        },
+        prev() {
+          console.log(this.now = Math.max(1, --this.now))
+          this.setPages()
+        },
+        next() {
+          console.log(this.now = Math.min(this.list.length, ++this.now))
+          this.setPages()
+        },
+        setPages() {
+          let l = this.list.length
+            , start = 0
+            , end = 0
+            , arr = []
+
+          start = Math.min(Math.max(this.now - this.offset - 1, 0), l - (this.offset * 2 + 1)) // 开始位置
+          end = Math.min(l, start + this.offset * 2 + 1) // 结束位置
+          this.now > this.offset + 1 && arr.unshift(`...${this.ellipsis}`) // 开始标记
+          for (let x = start; x < end; x++) arr.push(x + 1) // 页码
+          end < l && arr.push(`${this.ellipsis}...`) // 结束标记
+          this.pages = arr // 最终结果
+
+          console.log(arr, start, end)
+        }
+      },
+      mounted: function () {
+        this.setPages()
+      }
+
+    }).$mount('#app')
+  </script>
+  </body>
+</html>
