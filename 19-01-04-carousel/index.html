@@ -5,7 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>carousel</title>
   </head>
+  <style>
+    .container{
+      position: absolute;
+      top:100px;
+      left:100px;
+    }
+    img{
+      width:500px;
+    }
+    .hidden{
+      display:none;
+    }
+    .btn{
+      position:absolute;
+      top:350px;
+      left:515px;
+    }
+    a{
+      width:15px;
+      height:20px;
+      background:white;
+      display:inline-block;
+      line-height:20px;
+      text-align: center;
+    }
+  </style>
   <body>
-
+    <div class="container">
+      <img src="../19-01-04-carousel/image/banner1.jpg" alt="">
+      <img src="../19-01-04-carousel/image/banner2.jpg" alt="" class="hidden">
+      <img src="../19-01-04-carousel/image/banner3.jpg" alt="" class="hidden">
+      <img src="../19-01-04-carousel/image/banner4.jpeg" alt="" class="hidden">
+      <img src="../19-01-04-carousel/image/banner5.jpeg" alt="" class="hidden">
+      <img src="../19-01-04-carousel/image/banner6.jpg" alt="" class="hidden">
+      <img src="../19-01-04-carousel/image/banner7.jpg" alt="" class="hidden">
+      <img src="../19-01-04-carousel/image/banner8.jpg" alt="" class="hidden">
+    </div>
+    <div class="btn">
+      <a onmouseover="show()">1</a>
+      <a onmouseover="show()">2</a>
+      <a onmouseover="show()">3</a>
+      <a onmouseover="show()">4</a>
+    </div>
   </body>
 </html>
