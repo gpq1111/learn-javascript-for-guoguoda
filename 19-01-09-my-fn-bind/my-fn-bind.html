@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+  <script>
+    Function.prototype.bind2 = function (context) {
+      _this = this;
+      return function() {
+        _this.apply(context, arguments);
+      }
+    };
+
+    var aaa = "Tt's window aaa.";
+    var obj = {
+      aaa: "It's obj aaa."
+    };
+
+    var show = function () {
+      console.log(this.aaa);
+    }.bind2(obj)
+
+    show();
+
+  </script>
+  </body>
+</html>
