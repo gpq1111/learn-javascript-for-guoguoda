@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <style>
+        .carouse-box {
+            position: relative;
+        }
+        .img-box {
+            width: 500px;
+            height: 300px;
+            margin: 15px auto;
+        }
+        .img-box .img-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: 500ms;
+        }
+        .img-box .img-item.active {
+            opacity: 1;
+        }
+        .img-box .img-item img {
+            width: 100%;
+            height: 100%;
+        }
+        .pointer-box {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+        }
+        .pointer-box span {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 10px;
+            background: #eee;
+            cursor: pointer;
+        }
+        .pointer-box span.active {
+            background: #ff6f6c;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="carouse-box">
+        <div class="img-box" id="img-box">
+            <div class="img-item active">
+                <img src="./image/banner1.jpg">
+            </div>
+            <div class="img-item">
+                <img src="./image/banner2.jpg">
+            </div>
+            <div class="img-item">
+                <img src="./image/banner3.jpg">
+            </div>
+            <div class="img-item">
+                <img src="./image/banner4.jpg">
+            </div>
+            <div class="img-item">
+                <img src="./image/banner5.jpg">
+            </div>
+        </div>
+        <div class="pointer-box" id="pointer-box">
+            <span class="active" idx="0"></span>
+            <span idx="1"></span>
+            <span idx="2"></span>
+            <span idx="3"></span>
+            <span idx="4"></span>
+        </div>
+    </div>
+
+    <script>
+        function el(str) {
+            var nodeList = document.querySelectorAll(str)
+            // return nodeList.length === 1 ? nodeList[0] : nodeList
+            // if (nodeList.length === 1) {
+            //     return nodeList[0]
+            // } else {
+            //     return nodeList
+            // }
+            return nodeList
+        }
+        var imgBox = el('.img-box')[0]
+        var imgItems = el('.img-box .img-item')
+        var pointerBox = el('.pointer-box')[0]
+        var pointerItems = el('.pointer-box span')
+
+        console.log(el('.pointer-box'), el('.pointer-box')[0], document.getElementsByClassName(''))
+
+        // console.log(imgBox, imgItems, pointerBox)
+
+        pointerBox.onclick = function (event) {
+            if (event.target.tagName === 'SPAN'){
+                var idx = event.target.getAttribute('idx')
+                for(let x = 0; x < imgItems.length; x++) {
+                    if (x == idx) {
+                        imgItems[x].classList.add('active')
+                    } else {
+                        imgItems[x].classList.remove('active')
+                    }
+                }
+                // for (let x = 0; x < pointerItems.length; x++) {
+                //     x == idx
+                //         ? pointerItems[x].classList.add('active')
+                //         : pointerItems[x].classList.remove('active')
+                // }
+            }
+        }
+
+        // console.log(imgBox, imgItems, pointerBox)
+    </script>
+</body>
+</html>

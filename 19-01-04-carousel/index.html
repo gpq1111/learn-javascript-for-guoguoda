@@ -1,52 +1,111 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>carousel</title>
-  </head>
-  <style>
-    .container{
-      position: absolute;
-      top:100px;
-      left:100px;
-    }
-    img{
-      width:500px;
-    }
-    .hidden{
-      display:none;
-    }
-    .btn{
-      position:absolute;
-      top:350px;
-      left:515px;
-    }
-    a{
-      width:15px;
-      height:20px;
-      background:white;
-      display:inline-block;
-      line-height:20px;
-      text-align: center;
-    }
-  </style>
-  <body>
-    <div class="container">
-      <img src="../19-01-04-carousel/image/banner1.jpg" alt="">
-      <img src="../19-01-04-carousel/image/banner2.jpg" alt="" class="hidden">
-      <img src="../19-01-04-carousel/image/banner3.jpg" alt="" class="hidden">
-      <img src="../19-01-04-carousel/image/banner4.jpeg" alt="" class="hidden">
-      <img src="../19-01-04-carousel/image/banner5.jpeg" alt="" class="hidden">
-      <img src="../19-01-04-carousel/image/banner6.jpg" alt="" class="hidden">
-      <img src="../19-01-04-carousel/image/banner7.jpg" alt="" class="hidden">
-      <img src="../19-01-04-carousel/image/banner8.jpg" alt="" class="hidden">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>carousel</title>
+</head>
+<style>
+  .carousel-box{
+    position:relative;
+  }
+  .img-box{
+    width:500px;
+    height:400px;
+    margin: 15px auto;
+  }
+  .img-item{
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left:0;
+    opacity: 0;
+    transition: 500ms;
+  }
+  .img-item img{
+    height:100%;
+    width: 100%;
+
+  }
+  .img-item.active{
+    opacity: 1;
+  }
+  .pointer-box{
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+  .pointer-box span{
+    display: inline-block;
+    width:15px;
+    height: 15px;
+    border-radius: 10px;
+    background:white;
+
+  }
+  .pointer-box .active{
+    background: orange;
+  }
+</style>
+
+<body>
+  <div class="carousel-box">
+    <div class="img-box">
+      <div class="img-item active">
+        <img src="./image/banner1.jpg" alt="">
+      </div>
+      <div class="img-item">
+        <img src="./image/banner2.jpg" alt="">
+      </div>
+      <div class="img-item">
+        <img src="./image/banner3.jpg" alt="">
+      </div>
+      <div class="img-item">
+        <img src="./image/banner4.jpg" alt="">
+      </div>
+      <div class="img-item">
+        <img src="./image/banner5.jpg" alt="">
+      </div> 
     </div>
-    <div class="btn">
-      <a onmouseover="show()">1</a>
-      <a onmouseover="show()">2</a>
-      <a onmouseover="show()">3</a>
-      <a onmouseover="show()">4</a>
+    <div class="pointer-box">
+      <span idx="0" class="active"></span>
+      <span idx="1"></span>
+      <span idx="2"></span>
+      <span idx="3"></span>
+      <span idx="4"></span>
     </div>
-  </body>
+  </div>
+  <script>
+    function el(str){
+      var nodeList=document.querySelectorAll(str)
+      return nodeList;
+    }
+    var imgBox=el(".img-box")[0];
+    var imgItem=el(".img-item");
+    var pointerBox=el(".pointer-box")[0];
+    var pointerSpan=el(".pointer-box span");
+    // console.log(imgBox, imgItem, pointerBox, pointerSpan)
+    pointerBox.onclick=function(e){
+      console.log(e)
+      var idx=e.target.getAttribute("idx")
+      if(e.target.tagName==="SPAN"){
+        for(let x=0;x< imgItem.length;x++){
+          if(x==idx){
+            imgItem[x].classList.add("active")
+          }else{
+            imgItem[x].classList.remove("active")
+          }
+        }
+        for(let x=0;x< pointerSpan.length;x++){
+          x==idx? pointerSpan[x].classList.add("active"): pointerSpan[x].classList.remove("active")
+        }
+      }
+    }
+  </script>
+</body>
+
 </html>
